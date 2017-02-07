@@ -164,6 +164,7 @@ public interface CommonParams {
    * Timeout value in milliseconds.  If not set, or the value is &gt;= 0, there is no timeout.
    */
   String TIME_ALLOWED = "timeAllowed";
+  String DOCS_ALLOWED = "docsAllowed";
   
   /** 'true' if the header should include the handler name */
   String HEADER_ECHO_HANDLER = "echoHandler";

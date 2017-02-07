@@ -364,9 +364,11 @@ public class QueryComponent extends SearchComponent
       throw new SolrException(SolrException.ErrorCode.BAD_REQUEST, "Can not search using both " +
                               CursorMarkParams.CURSOR_MARK_PARAM + " and " + CommonParams.TIME_ALLOWED);
     }
+    int docsAllowed = params.getInt(CommonParams.DOCS_ALLOWED, -1);
 
     QueryCommand cmd = rb.getQueryCommand();
     cmd.setTimeAllowed(timeAllowed);
+    cmd.setDocsAllowed(docsAllowed);
 
     req.getContext().put(SolrIndexSearcher.STATS_SOURCE, statsCache.get(req));
     
