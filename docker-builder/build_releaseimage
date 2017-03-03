@@ -4,5 +4,5 @@ SCRIPTPATH=`dirname $SCRIPT`
 VERSION=8.1.2-SNAPSHOT
 PACKAGENAME=solr-$VERSION.tgz
 cp $SCRIPTPATH/../solr/package/$PACKAGENAME $SCRIPTPATH/releaseimage
-docker build $SCRIPTPATH/releaseimage -f $SCRIPTPATH/releaseimage/Dockerfile
+docker build $SCRIPTPATH/releaseimage -f $SCRIPTPATH/releaseimage/Dockerfile -t solr-custom:8.1.2
 rm -f $SCRIPTPATH/releaseimage/$PACKAGENAME

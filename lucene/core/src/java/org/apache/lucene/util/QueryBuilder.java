@@ -39,7 +39,9 @@ import org.apache.lucene.search.spans.SpanNearQuery;
 import org.apache.lucene.search.spans.SpanOrQuery;
 import org.apache.lucene.search.spans.SpanQuery;
 import org.apache.lucene.search.spans.SpanTermQuery;
+import org.apache.lucene.search.PayloadScoreQuery;
 import org.apache.lucene.util.graph.GraphTokenStreamFiniteStrings;
+
 
 /**
  * Creates queries from the {@link Analyzer} chain.
@@ -683,6 +685,9 @@ public class QueryBuilder {
    * @return new TermQuery instance
    */
   protected Query newTermQuery(Term term) {
+    if (term.field() != null && term.field().endsWith("_payloads")) {
+      return new PayloadScoreQuery(new SpanTermQuery(term), false);
+    }
     return new TermQuery(term);
   }
   
