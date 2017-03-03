@@ -31,6 +31,7 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.MultiPhraseQuery;
+import org.apache.lucene.search.PayloadScoreQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.SynonymQuery;
@@ -377,7 +378,7 @@ public class QueryBuilder {
     if (!stream.incrementToken()) {
       throw new AssertionError();
     }
-    
+
     return newTermQuery(new Term(field, termAtt.getBytesRef()));
   }
   
@@ -683,6 +684,9 @@ public class QueryBuilder {
    * @return new TermQuery instance
    */
   protected Query newTermQuery(Term term) {
+    if (term.field() != null && term.field().endsWith("_payload")) {
+      return new PayloadScoreQuery(new SpanTermQuery(term), false);
+    }
     return new TermQuery(term);
   }
   
