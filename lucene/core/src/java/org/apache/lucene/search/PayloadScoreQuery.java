@@ -214,7 +214,7 @@ public class PayloadScoreQuery extends SpanQuery {
     protected Explanation getPayloadExplanation() {
       return Explanation.match(
           getPayloadScore(),
-          getClass().getSimpleName() + ".docScore()");
+          this.weight.getQuery() + ".docScore()");
     }
 
     protected float getSpanScore() throws IOException {
