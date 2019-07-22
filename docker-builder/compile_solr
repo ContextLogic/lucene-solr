@@ -1,0 +1,4 @@
+#!/bin/bash
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+docker run -u $(id -u):$(id -g) -it -v /tmp:/home/$USER -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group -v "$SCRIPTPATH/..":/tmp/lucene-solr -w /tmp/lucene-solr/solr ant-buildbox:local bash -c "ant ivy-bootstrap && ant create-package"

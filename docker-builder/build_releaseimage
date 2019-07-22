@@ -1,0 +1,8 @@
+#!/bin/bash
+SCRIPT=`realpath $0`
+SCRIPTPATH=`dirname $SCRIPT`
+VERSION=8.1.2-SNAPSHOT
+PACKAGENAME=solr-$VERSION.tgz
+cp $SCRIPTPATH/../solr/package/$PACKAGENAME $SCRIPTPATH/releaseimage
+docker build $SCRIPTPATH/releaseimage -f $SCRIPTPATH/releaseimage/Dockerfile
+rm -f $SCRIPTPATH/releaseimage/$PACKAGENAME
